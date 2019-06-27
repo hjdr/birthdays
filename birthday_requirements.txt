@@ -1,0 +1,20 @@
+
+as a user
+I want to store my friends names and birthdays
+so that I can keep track of their birthdays
+
+as a user
+I want to see all the names and corresponding birthdays in one printout
+so that I don't have to manually search
+
+as a user
+I want to check whose birthday it is today
+so that I can wish them a happy birthday
+
+
+objects
+
+friend
+date
+
+class birthday -> friend -> date
