@@ -1,4 +1,5 @@
 require "birthday_list"
+require "date"
 
 describe Birthday do
 
@@ -27,17 +28,32 @@ describe Birthday do
     it "prints out all of the names & birthdays in the friends_list" do
       subject.add_info("Boris", "01-01-1965")
       subject.add_info("Henny Relish", "01-01-2007")
-      expect(subject.print_all_friends_birthdays).to eq("Boris's birthday is 01-01-1965 Henny Relish's birthday is 01-01-2007")
+      expect(subject.print_all_friends_birthdays).to eq("Boris's birthday is 01-01-1965,\nHenny Relish's birthday is 01-01-2007")
+    end
+  end
+
+  describe "#current_day_month" do
+    it "returns the current day and month in dd-mm string format" do
+      expect(subject.current_day_month).to eq(DateTime.now.strftime("%d-%m"))
     end
   end
 
   describe "#check_for_birthdays_today" do
-    it "prints out all of the names in the friends_list whose birthday it is today" do
-      subject.add_info("Boris", "27-06-1965")
-      subject.add_info("Henny Relish", "01-01-2007")
-      expect(subject.check_for_birthdays_today).to eq("Boris")
+    context "with one friend" do
+      it "prints out the name in the friends_list whose birthday it is today" do
+        subject.add_info("Boris", "28-06-1965")
+        subject.add_info("Henny Relish", "01-01-2007")
+        expect(subject.check_for_birthdays_today).to eq("Boris")
+      end
+    end
+
+    context "with two friends" do
+      it "prints out the name of the friends_list whose birthday it is today" do
+        subject.add_info("Boris Billy", "28-06-1965")
+        subject.add_info("Harry Riley", "28-06-1988")
+        subject.add_info("Henny Relish", "01-01-2007")
+        expect(subject.check_for_birthdays_today).to eq("Boris Billy,\nHarry Riley")
+      end
     end
   end
-
-
 end

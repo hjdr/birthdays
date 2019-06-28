@@ -1,4 +1,6 @@
 
+require 'date'
+
 class Birthday
   
   attr_accessor = :friends_list
@@ -21,6 +23,16 @@ class Birthday
     print_list = @friends_list.map do |name, birthday|
       "#{name}'s birthday is #{birthday}"
     end
-    print_list.join(" ")
+    print_list.join(",\n")
+  end
+
+  def current_day_month
+    DateTime.now.strftime("%d-%m")
+  end
+
+  def check_for_birthdays_today
+    print_friends = @friends_list.select do |name, birthday| birthday.include?(current_day_month)
+    end
+    print_friends.keys.join(",\n")
   end
 end
